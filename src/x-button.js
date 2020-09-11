@@ -52,16 +52,16 @@ class XButton extends HTMLElement {
     }
 
     connectedCallback(){
-        console.log("组件插入到DOM");            
+        console.log("Web Component insert.");            
     }
     disconnectedCallback(){
-        console.log("组件从DOM移除");
+        console.log("Web Component remove.");
     }
     adoptedCallback(){
-        console.log("组件移动到新的DOM");
+        console.log("Web Component remove to new DOM.");
     }
     attributeChangedCallback(name, oldValue, newValue){
-        console.log('Attribute ' + name + ': ' + oldValue + ', ' + newValue);
+        console.log('Web Component Attribute ' + name + ': ' + oldValue + ', ' + newValue);
         
     }
     
