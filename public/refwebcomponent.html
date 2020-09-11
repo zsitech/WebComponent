@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../src/x-button.js"></script>
+</head>
+<body>
+  <h1>Web Component example</h1>
+  <h3>HTMLElement</h3>
+  <div>
+    <x-button id="x1" text='a-text' value='a-value'>134</x-button>
+    <x-button>456</x-button>    
+  </div>
+  
+<script>
+  function test(){
+    // alert(document.getElementById('x1').getAttribute('value'));
+    document.getElementById('x1').innerHTML='123';
+    document.getElementById('x1').innerText='456';
+    document.getElementById('btn2').innerHTML='456';
+  }
+</script>
+</html>
