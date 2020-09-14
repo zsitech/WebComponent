@@ -22,24 +22,28 @@ template.innerHTML = `
             padding: 0px;            
         }
 
+        .x-button:hover {
+            background-color: #336CAB;
+        }
+
         .x-span {
             -webkit-user-select: none;
             user-select: none;
         }
 
         .shadow {
-            box-shadow: 5px 5px 5px gray;
+            box-shadow: 3px 3px 3px gray;
         }
     </style>
     <div class="x-button">
-        <button class="x-span"><slot></slot></button>
+        <span class="x-span"><slot></slot></span>
     </div>
     `;
 // <button class="x-button" type="button"><slot></slot></button>   
 class XButton extends HTMLElement {
     // 自定义组件的属性
     static get observedAttributes() {
-        return ["data-effect-type", 'data-size'];
+        return ["data-effect-type", 'data-background-color', 'data-foreground-color', 'data-size'];
     }
 
     constructor() {
@@ -59,58 +63,93 @@ class XButton extends HTMLElement {
         // 为组件添加事件             
         // this.addEventListener('click', () => {
         //     console.log('click me.');
-        //     // console.log(typeof(this.getAttribute('data-effect-type')))
         // });
-        // this.addEventListener('mousedown', (event) => {
-        //     console.log(event.type);
-        // });
+
     }
 
     connectedCallback() {
         console.log(this)
         console.log("Web Component insert.");
     }
+
     disconnectedCallback() {
         console.log("Web Component remove.");
     }
+
     adoptedCallback() {
         console.log("Web Component remove to new DOM.");
     }
+
     attributeChangedCallback(name, oldValue, newValue) {
         console.log('Web Component Attribute ' + name + ': ' + oldValue + ', ' + newValue);
 
+        console.log(']]]]]]]]]]]' + name + this.shadowRoot.querySelector('.x-button').getAttribute(name) + ';')
+        this.shadowRoot.querySelector('.x-button').style.cssText=name + newValue + ';'
+
+        this.shadowRoot.querySelector('.x-button').setAttribute(name, newValue);
+        // console.log('------ ' + this.shadowRoot.querySelector('.x-button').getAttribute('data-background-color'));
+        //box.style.cssText="border:5px solid black; width:400px; height:200px;"
+
+        // this.shadowRoot.querySelector('.x-button').style.cssText='background-color: ' 
+        // + this.shadowRoot.querySelector('.x-button').getAttribute('data-background-color') + ';'
+
         // 根据属性改变确定要绑定的事件
+        let htmlElement = this.shadowRoot;
         let condition = parseInt(this.getAttribute('data-effect-type'));
-        switch (condition) {
+        this.visualEffect(htmlElement, condition);
+
+        // 把传进来的属性应用到元素上面去  
+        // this.applicationAttributes(htmlElement.querySelector('.x-button'), attrs);
+    }
+
+    // 实现一些视觉效果
+    visualEffect(htmlElement, effectType) {
+        switch (effectType) {
             case 0:
                 break;
             case 1:
                 this.addEventListener('mouseover', (event) => {
-                    console.log(event.type);
-                    this.shadowRoot.querySelector('.x-button').classList.add('shadow');
+                    htmlElement.querySelector('.x-button').classList.add('shadow');
                 });
                 this.addEventListener('mouseout', (event) => {
-                    console.log(event.type);
-                    this.shadowRoot.querySelector('.x-button').classList.remove('shadow');
+                    htmlElement.querySelector('.x-button').classList.remove('shadow');
+                });
+                this.addEventListener('mousedown', (event) => {
+                    htmlElement.querySelector('.x-button').classList.remove('shadow');
+                });
+                this.addEventListener('mouseup', (event) => {
+                    htmlElement.querySelector('.x-button').classList.add('shadow');
                 });
                 break;
             case 2:
+                htmlElement.querySelector('.x-button').classList.add('shadow');
+                this.addEventListener('mousedown', (event) => {
+                    htmlElement.querySelector('.x-button').classList.remove('shadow');
+                });
+                this.addEventListener('mouseup', (event) => {
+                    htmlElement.querySelector('.x-button').classList.add('shadow');
+                });
                 break;
             case 3:
-                break
+                break;
             default:
                 break;
         }
+
     }
 
+    // 把传进来的属性应用到元素上面去
+    applicationAttributes(htmlElement, attrs) {
+        attrs.forEach((attr) => {
+            console.log(attr + ": " + htmlElement.getAttribute(attr));
+        });
+    }
 }
 
 window.customElements.define('x-button', XButton);
 
 
-// .x-button:hover {
-//     background-color: #336CAB;
-// }
+
 
 // function test(el) {
 //     let shadow2 = el.shadowRoot;
