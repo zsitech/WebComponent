@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./XButton/src/x-button.js"></script>
+  <style type="text/css">
+    #btn {
+      width: 200px;
+      height: 30px;
+      /* box-shadow: 5px 5px 5px gray; */
+      margin: 20px;
+    }
+
+    #x1 {
+      margin: 20px;
+    }
+
+    #x2 {
+      margin: 20px;
+    }
+
+    .shadow {
+      box-shadow: 5px 5px 5px gray;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Web Component example</h1>
+  <div style="padding: 20px;">
+    <x-button id="x1" data-effect-type="1" data-size="[100, 50]">X-Button 1</x-button>
+    <x-button id="x2" data-effect-type="1" data-size="[100, 50]">X-Button 2</x-button>
+    <button id="btn" onclick="fbtn()">Button</button>
+  </div>
+
+  <script>
+    function fbtn() {
+      let b = document.querySelector('#btn');
+      console.dir(b);
+      console.log('end');
+
+    }
+
+   
+  </script>
+
+</html>
