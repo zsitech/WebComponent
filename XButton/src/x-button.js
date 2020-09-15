@@ -43,7 +43,7 @@ template.innerHTML = `
 class XButton extends HTMLElement {
     // 自定义组件的属性
     static get observedAttributes() {
-        return ["data-effect-type", 'data-background-color', 'data-foreground-color', 'data-size'];
+        return ["data-effect-type", 'data-background-color', 'data-color', 'data-elevation'];
     }
 
     constructor() {
@@ -68,7 +68,6 @@ class XButton extends HTMLElement {
     }
 
     connectedCallback() {
-        console.log(this)
         console.log("Web Component insert.");
     }
 
@@ -81,53 +80,36 @@ class XButton extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        console.log('Web Component Attribute ' + name + ': ' + oldValue + ', ' + newValue);
+        console.log('Web Component Attribute: ' + name + ': ' + oldValue + ', ' + newValue);
 
-        console.log(']]]]]]]]]]]' + name + this.shadowRoot.querySelector('.x-button').getAttribute(name) + ';')
-        this.shadowRoot.querySelector('.x-button').style.cssText=name + newValue + ';'
-
-        this.shadowRoot.querySelector('.x-button').setAttribute(name, newValue);
-        // console.log('------ ' + this.shadowRoot.querySelector('.x-button').getAttribute('data-background-color'));
-        //box.style.cssText="border:5px solid black; width:400px; height:200px;"
-
-        // this.shadowRoot.querySelector('.x-button').style.cssText='background-color: ' 
-        // + this.shadowRoot.querySelector('.x-button').getAttribute('data-background-color') + ';'
+        // 把传进来的属性应用到元素上面去 
+        this.applicationCSSStyle(this.shadowRoot, name, newValue);      
 
         // 根据属性改变确定要绑定的事件
         let htmlElement = this.shadowRoot;
         let condition = parseInt(this.getAttribute('data-effect-type'));
         this.visualEffect(htmlElement, condition);
 
-        // 把传进来的属性应用到元素上面去  
-        // this.applicationAttributes(htmlElement.querySelector('.x-button'), attrs);
+         
     }
 
     // 实现一些视觉效果
-    visualEffect(htmlElement, effectType) {
+    visualEffect(element, effectType) {
         switch (effectType) {
             case 0:
                 break;
             case 1:
                 this.addEventListener('mouseover', (event) => {
-                    htmlElement.querySelector('.x-button').classList.add('shadow');
+                    element.querySelector('.x-button').classList.add('shadow');
                 });
                 this.addEventListener('mouseout', (event) => {
-                    htmlElement.querySelector('.x-button').classList.remove('shadow');
+                    element.querySelector('.x-button').classList.remove('shadow');
                 });
                 this.addEventListener('mousedown', (event) => {
-                    htmlElement.querySelector('.x-button').classList.remove('shadow');
+                    element.querySelector('.x-button').classList.remove('shadow');
                 });
                 this.addEventListener('mouseup', (event) => {
-                    htmlElement.querySelector('.x-button').classList.add('shadow');
-                });
-                break;
-            case 2:
-                htmlElement.querySelector('.x-button').classList.add('shadow');
-                this.addEventListener('mousedown', (event) => {
-                    htmlElement.querySelector('.x-button').classList.remove('shadow');
-                });
-                this.addEventListener('mouseup', (event) => {
-                    htmlElement.querySelector('.x-button').classList.add('shadow');
+                    element.querySelector('.x-button').classList.add('shadow');
                 });
                 break;
             case 3:
@@ -139,10 +121,32 @@ class XButton extends HTMLElement {
     }
 
     // 把传进来的属性应用到元素上面去
-    applicationAttributes(htmlElement, attrs) {
-        attrs.forEach((attr) => {
-            console.log(attr + ": " + htmlElement.getAttribute(attr));
-        });
+    applicationCSSStyle(element, attr, value) {
+        
+        switch (attr) {
+            case 'data-color':
+                element.querySelector('.x-button').style.color = value;
+                // element.querySelector('.x-button').setAttribute(attr.substring(attr.indexOf('-') + 1),  value);                
+                break;
+            case 'data-background-color':
+                element.querySelector('.x-button').style.backgroundColor = value;
+                // element.querySelector('.x-button').style.cssText += attr.substring(attr.indexOf('-') + 1) + ': ' + value + ';';  // 这样也是可以设置的 
+                // element.querySelector('.x-button').setAttribute(attr.substring(attr.indexOf('-') + 1),  value); // 这样设置不可以, setAttribute第一次用的时候可以，第二次就不行了
+                break;
+            case 'data-effect-type':
+                break;
+            case 'data-elevation':
+                value == '1' ? element.querySelector('.x-button').classList.add('shadow') : element.querySelector('.x-button').classList.remove('shadow');
+                break;
+            default:
+                break;
+        }
+
+        
+
+        // attrs.forEach((attr) => {
+        //     console.log(attr + ": " + htmlElement.getAttribute(attr));
+        // });
     }
 }
 
