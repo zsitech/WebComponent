@@ -13,39 +13,27 @@
       margin: 10px;
     }
 
-    #x1 {
+    #x1, #x2, #x3 {
       margin: 10px;
     }
 
-    #x2 {
-      margin: 10px;
-    }
-
-    .shadow {
-      box-shadow: 5px 5px 5px gray;
-    }
 
   </style>
 </head>
 
 <body>
-
+ 
   <h1>Web Component example</h1>
   <div style="padding: 20px;">
-    <x-button id="x1" data-effect-type="0" data-elevation="1" data-background-color="#409EFF" data-color="#606266" data-size="[100, 50]">X-Button 1</x-button>
-    <x-button id="x2" data-effect-type="1" data-elevation="1">X-Button 2</x-button>
-    <x-button id="x3" data-effect-type="1" data-elevation="1">X-Button 3</x-button>
-    <button id="btn" onclick="fbtn()">Button</button>
+    <x-button id="x1" data-effect-type="0" data-elevation="0" data-background-color="#409EFF" 
+      data-size="[100, 50]">X-1</x-button>
+    <x-button id="x2" data-effect-type="1" data-elevation="0" data-background-color="#1C88F7">X-Btn</x-button>
+    <x-button id="x3" data-effect-type="2" data-elevation="1">X-Button 3</x-button>
+    
   </div>
 
   <script>
-
-    function fbtn() {
-      let b = document.querySelector('#btn');
-      console.dir(b);
-      console.log('end');
-    }
-
+    
   </script>
 
 </html>

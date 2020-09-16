@@ -12,31 +12,61 @@ template.innerHTML = `
             justify-content: center;
             align-items: center;
             color: white;
-            width: 108px;
+            width: 96px;
             height: 30px;
             background-color: #184C85;
             border-radius: 5px;
             outline: none;
             font: 16px "Microsoft YaHei";
             border: none;
-            padding: 0px;            
-        }
-
-        .x-button:hover {
-            background-color: #336CAB;
+            padding: 0px;
+            cursor:pointer; 
         }
 
         .x-span {
+            position: relative;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
             -webkit-user-select: none;
             user-select: none;
+        }
+
+        .x-span:before{
+          position: absolute;
+          display: block;
+          top: 0; right: 0; bottom: 0; left: 0;
+          z-index:1;
+          border-radius: 5px;
+          background: rgba(0,0,0,.1);
+        }
+        
+        .x-span:hover:before{
+          content: '';
+        }
+      
+        .x-span:after{
+          position: absolute;
+          top: 0; right: 0; bottom: 0; left: 0;
+          z-index: 1;
+          border-radius: 5px;
+          background: rgba(255,255,255,.2);
+        }
+        
+        .x-span:active:after{
+          content: '';
         }
 
         .shadow {
             box-shadow: 3px 3px 3px gray;
         }
     </style>
+
     <div class="x-button">
-        <span class="x-span"><slot></slot></span>
+        <span class="x-span"><slot></slot></span>        
     </div>
     `;
 // <button class="x-button" type="button"><slot></slot></button>   
@@ -82,37 +112,44 @@ class XButton extends HTMLElement {
     attributeChangedCallback(name, oldValue, newValue) {
         console.log('Web Component Attribute: ' + name + ': ' + oldValue + ', ' + newValue);
 
-        // 把传进来的属性应用到元素上面去 
-        this.applicationCSSStyle(this.shadowRoot, name, newValue);      
-
-        // 根据属性改变确定要绑定的事件
         let htmlElement = this.shadowRoot;
+
+        // 把传进来的属性应用到元素上面去 
+        this.applicationCSSStyle(htmlElement, name, newValue);      
+
+        // 根据属性改变确定要绑定的事件        
         let condition = parseInt(this.getAttribute('data-effect-type'));
         this.visualEffect(htmlElement, condition);
-
          
     }
 
     // 实现一些视觉效果
-    visualEffect(element, effectType) {
+    visualEffect(shadowRoot, effectType) {
+        let element = shadowRoot.querySelector('.x-button');
         switch (effectType) {
             case 0:
                 break;
             case 1:
                 this.addEventListener('mouseover', (event) => {
-                    element.querySelector('.x-button').classList.add('shadow');
+                    element.classList.add('shadow');
                 });
                 this.addEventListener('mouseout', (event) => {
-                    element.querySelector('.x-button').classList.remove('shadow');
+                    element.classList.remove('shadow');
                 });
                 this.addEventListener('mousedown', (event) => {
-                    element.querySelector('.x-button').classList.remove('shadow');
+                    element.classList.remove('shadow');
                 });
                 this.addEventListener('mouseup', (event) => {
-                    element.querySelector('.x-button').classList.add('shadow');
+                    element.classList.add('shadow');
                 });
                 break;
-            case 3:
+            case 2:                
+                this.addEventListener('mousedown', (event) => {
+                    element.classList.remove('shadow');
+                });
+                this.addEventListener('mouseup', (event) => {
+                    element.classList.add('shadow');
+                });
                 break;
             default:
                 break;
@@ -121,32 +158,27 @@ class XButton extends HTMLElement {
     }
 
     // 把传进来的属性应用到元素上面去
-    applicationCSSStyle(element, attr, value) {
-        
+    applicationCSSStyle(shadowRoot, attr, value) {    
+        let element = shadowRoot.querySelector('.x-button');  
+        // 更改CSS样式  
         switch (attr) {
-            case 'data-color':
-                element.querySelector('.x-button').style.color = value;
-                // element.querySelector('.x-button').setAttribute(attr.substring(attr.indexOf('-') + 1),  value);                
+            case 'data-color':         
+            element.style.setProperty(attr.substring(attr.indexOf('-') + 1), value);  
+                // element.style.color = value; // 这样也是可以设置的                 
                 break;
             case 'data-background-color':
-                element.querySelector('.x-button').style.backgroundColor = value;
-                // element.querySelector('.x-button').style.cssText += attr.substring(attr.indexOf('-') + 1) + ': ' + value + ';';  // 这样也是可以设置的 
-                // element.querySelector('.x-button').setAttribute(attr.substring(attr.indexOf('-') + 1),  value); // 这样设置不可以, setAttribute第一次用的时候可以，第二次就不行了
-                break;
-            case 'data-effect-type':
+                element.style.setProperty(attr.substring(attr.indexOf('-') + 1), value);
                 break;
             case 'data-elevation':
-                value == '1' ? element.querySelector('.x-button').classList.add('shadow') : element.querySelector('.x-button').classList.remove('shadow');
+                value == '1' ? element.classList.add('shadow') : element.classList.remove('shadow');
+                break;
+            case 'data-effect-type':
                 break;
             default:
                 break;
         }
 
         
-
-        // attrs.forEach((attr) => {
-        //     console.log(attr + ": " + htmlElement.getAttribute(attr));
-        // });
     }
 }
 
@@ -161,3 +193,12 @@ window.customElements.define('x-button', XButton);
 //         console.log(child.nodeName)
 //     });   
 // }
+
+// attrs.forEach((attr) => {
+//     console.log(attr + ": " + htmlElement.getAttribute(attr));
+// });
+
+
+// element.style.backgroundColor = value;
+// element.style.cssText += attr.substring(attr.indexOf('-') + 1) + ': ' + value + ';';  // 这样也是可以设置的 
+// element.setAttribute(attr.substring(attr.indexOf('-') + 1),  value); // 这样设置不可以, setAttribute第一次用的时候可以，第二次就不行了
