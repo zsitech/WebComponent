@@ -12,14 +12,14 @@ template.innerHTML = `
             justify-content: center;
             align-items: center;
             color: white;
-            width: 96px;
-            height: 30px;
+            height: 30px;            
+            min-width: 80px;
+            max-width: 200px;
             background-color: #184C85;
             border-radius: 5px;
             outline: none;
             font: 16px "Microsoft YaHei";
             border: none;
-            padding: 0px;
             cursor:pointer; 
         }
 
@@ -27,7 +27,9 @@ template.innerHTML = `
             position: relative;
             display: inline-flex;
             justify-content: center;
-            align-items: center;
+            align-items: center;      
+            min-width: 80px;
+            max-width: 200px;
             width: 100%;
             height: 100%;
             border-radius: 5px;
@@ -60,13 +62,16 @@ template.innerHTML = `
           content: '';
         }
 
-        .shadow {
-            box-shadow: 3px 3px 3px gray;
+        .x-slot {
+            padding: 5px;
+        }
+        .x-shadow {
+            box-shadow: 2px 2px 2px gray;
         }
     </style>
 
     <div class="x-button">
-        <span class="x-span"><slot></slot></span>        
+        <span class="x-span"><slot class="x-slot"></slot></span>        
     </div>
     `;
 // <button class="x-button" type="button"><slot></slot></button>   
