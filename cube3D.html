@@ -1,99 +1,99 @@
 <html>
-	<head>
-		<style>
-			*{
-				padding:0;
-				margin:0;
-			}
-			body {
-				background-color: whitesmoke;
+
+<head>
+	<style>
+		body {
+			background-color: silver;
+		}
+
+		.wrap {
+			position: absolute;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			perspective: 800px;
+			perspective-origin: 50% 50%;
+		}
+
+		.cube {
+			width: 200px;
+			height: 200px;
+			z-index: 22;
+			transform-style: preserve-3d;
+			transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+			animation: spin 10s infinite linear;
+		}
+
+		.cube div {
+			position: absolute;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 200px;
+			height: 200px;
+			text-transform: uppercase;
+			/* background: rgba(255, 255, 255, 0.1);
+			box-shadow: inset 0 0 30px rgba(125, 125, 125, 0.8); */
+			opacity: .7;
+		}
+
+		.front {
+			transform: translateZ(100px);
+		}
+
+		.back {
+			transform: rotateY(180deg) translateZ(100px);
+		}
+
+		.left {
+			transform: rotateY(-90deg) translateZ(100px);
+		}
+
+		.right {
+			transform: rotateY(90deg) translateZ(100px);
+		}
+
+		.top {
+			transform: rotateX(90deg) translateZ(100px);
+		}
+
+		.bottom {
+			transform: rotateX(-90deg) translateZ(100px);
+		}
+
+		@keyframes spin {
+			from {
+				transform: rotateY(0);
 			}
 
-			/*立方体效果*/
-			.wrap {				
-				display: flex;
-				justify-content: center;
-            	align-items: center;
-				width: 100%;
-				height: 100%;
-				margin: auto;
-				z-index: 22;
+			to {
+				transform: rotateY(360deg);
 			}
+		}
 
-			.cube {
-				width: 240px;
-				height: 240px;
-				margin: 0 auto;
-				transform-style: preserve-3d;
-				/* transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); */
-				animation: rotate linear 2s infinite;
-				/* animation-timing-function: linear; */
-				/* perspective: 800px; */
-				/* perspective-origin: 240px 240px; */
-			}
+		.pic {
+			width: 200px;
+			height: 200px;
+		}
+	</style>
+</head>
+<!-- RMlogo.svg RMlogo-1.png-->
 
-			@keyframes rotate {
-				from {					
-					transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-				}
-				to {
-					transform: rotateX(180deg) rotateY(270deg) rotateZ(90deg);
-				}
-			}
+<body>
 
-			.cube div {
-				position: absolute;
-				width: 240px;
-				height: 240px;
-				opacity: .8;
-				transition: all .4s;
-				border-color: pink;
-				border-style: solid;
-			}
-
-			.cube .front {
-				transform: translateZ(120px);
-			}
-
-			.cube .back {
-				transform: rotateY(180deg) translateZ(120px);
-			}
-
-			.cube .left {
-				transform: rotateY(-90deg) translateZ(120px);
-			}
-
-			.cube .right {
-				transform: rotateY(90deg) translateZ(120px);
-			}
-
-			.cube .top {
-				transform: rotateX(90deg) translateZ(120px);
-			}
-
-			.cube .bottom {
-				transform: rotateX(-90deg) translateZ(120px);
-			}
-
-			.pic{
-				width: 240px;
-				height: 240px;
-			}
-		</style>
-	</head>
-	<!-- RMlogo.svg RMlogo-1.png-->
-	<body>
-
-		<div class="wrap">
-			<div class="cube">
-				<div class="front"><img src="./RMlogo-1.png" class="pic"></div>
-				<div class="back"><img src="./RMlogo-1.png" class="pic"></div>
-				<div class="left"><img src="./RMlogo-1.png" class="pic"></div>
-				<div class="right"><img src="./RMlogo-1.png" class="pic"></div>
-				<div class="top"><img src="./RMlogo-1.png" class="pic"></div>
-				<div class="bottom"><img src="./RMlogo-1.png" class="pic"></div>
-			</div>
+	<div class="wrap">
+		<div class="cube">
+			<div class="front"><img src="./RMlogo-1.png" class="pic"></div>
+			<div class="back"><img src="./RMlogo-1.png" class="pic"></div>
+			<div class="left"><img src="./RMlogo-1.png" class="pic"></div>
+			<div class="right"><img src="./RMlogo-1.png" class="pic"></div>
+			<div class="top"><img src="./RMlogo-1.png" class="pic"></div>
+			<div class="bottom"><img src="./RMlogo-1.png" class="pic"></div>
 		</div>
-		
-	</body>
+	</div>
+
+</body>
+
 </html>
