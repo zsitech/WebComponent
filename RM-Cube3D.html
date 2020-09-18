@@ -1,9 +1,17 @@
 <html>
 
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 	<style>
+		:hover {
+			transform: scale(1.0);
+		}
+
 		body {
 			background-color: silver;
+			margin: auto;
 		}
 
 		.wrap {
@@ -15,6 +23,7 @@
 			height: 100%;
 			perspective: 800px;
 			perspective-origin: 50% 50%;
+			/* backface-visibility: hidden; 对于解决闪烁貌似无效 */
 		}
 
 		.cube {
@@ -34,7 +43,7 @@
 			width: 200px;
 			height: 200px;
 			text-transform: uppercase;
-			background: rgba(255, 255, 255, 0.1);
+			background: rgba(255, 255, 255, 0.2);
 			box-shadow: inset 0 0 30px rgba(125, 125, 125, 0.8);
 			/* opacity: .7; */
 		}
