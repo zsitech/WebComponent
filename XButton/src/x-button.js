@@ -66,7 +66,7 @@ template.innerHTML = `
             padding: 5px;
         }
         .x-shadow {
-            box-shadow: 2px 2px 2px gray;
+            box-shadow: 3px 3px 3px gray;
         }
     </style>
 
