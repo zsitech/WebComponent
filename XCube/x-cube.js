@@ -26,8 +26,8 @@ template.innerHTML = `
             width: 200px;
             height: 200px;
             text-transform: uppercase;
-            background: rgba(192, 192, 192, .5);
-            box-shadow: inset 0 0 3px rgba(0, 0, 0, .5);
+            background-color: rgba(255,20,147,.7);
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, .3);
         }
 
         .front {
