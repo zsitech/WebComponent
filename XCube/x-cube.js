@@ -27,7 +27,7 @@ template.innerHTML = `
             height: 200px;
             text-transform: uppercase;
             background: rgba(192, 192, 192, .5);
-            box-shadow: inset 0 0 3px rgba(0, 0, 0, .1);
+            box-shadow: inset 0 0 3px rgba(0, 0, 0, .5);
         }
 
         .front {
