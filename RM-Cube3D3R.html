@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="./XCube/x-cube.js"></script>
+	<style>
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			background-color: silver;
+		}
+
+		.wrap {
+			position: relative;
+			display: flex;
+			width: 100%;
+			height: 100%;
+			top: -100px;
+			left: -100px;
+		}
+
+		.div {
+			/* position: relative; */
+			display: flex;
+			width: 100%;
+			height: 100%;
+			justify-content: center;
+			align-items: center;				
+		}
+
+	</style>
+</head>
+<!-- data-text="fron,back,left,right,top,bottom" -->
+<body>
+	<div class="wrap">
+		<div class="div">
+			 <x-cube data-direct="X" data-img="./RMlogo.svg"></x-cube>
+		</div>
+		<div class="div">
+			<x-cube data-direct="XYZ" data-img="./RMlogo.svg"></x-cube>
+		</div>
+		<div class="div">
+			<x-cube data-direct="Y" data-img="./RMlogo.svg"></x-cube>
+		</div>
+	</div>
+
+</body>
+
+</html>
