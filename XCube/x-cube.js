@@ -13,8 +13,8 @@ template.innerHTML = `
             width: 200px;
             height: 200px;
             transform-style: preserve-3d;
-            // transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-            animation: spin 8s infinite linear;
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            animation: spin 8s infinite linear alternate;
             user-select: none;
         }
 
@@ -26,8 +26,8 @@ template.innerHTML = `
             width: 200px;
             height: 200px;
             text-transform: uppercase;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: inset 0 0 30px rgba(125, 125, 125, 0.8);
+            background: rgba(192, 192, 192, .5);
+            box-shadow: inset 0 0 3px rgba(0, 0, 0, .1);
         }
 
         .front {
