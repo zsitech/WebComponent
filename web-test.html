@@ -8,9 +8,31 @@
   <script src="./XButton/src/x-button.js"></script>
   <style type="text/css">
    
-    #x1, #x2, #x3 {
-      margin: 10px;
-    }
+   .hex {
+  position: relative;
+  margin: 1em auto;
+  width: 10em; height: 17.32em;
+  border-radius: 1em/.5em;
+  background: orange;
+  transition: opacity .5s;
+}
+.hex:before, .hex:after {
+  position: absolute;
+  width: inherit; height: inherit;
+  border-radius: inherit;
+  background: inherit;
+  content: '';
+}
+.hex:before {
+   -webkit-transform: rotate(60deg);
+   -ms-transform: rotate(60deg);/*Added for IE9*/
+   transform: rotate(60deg);
+}
+.hex:after {
+  -webkit-transform: rotate(-60deg);
+  -ms-transform: rotate(-60deg);/*Added for IE9*/
+  transform: rotate(-60deg);
+}
 
 
   </style>
@@ -19,14 +41,14 @@
 <body>
  
   <h1>Web Component example</h1>
-  <div style="padding: 20px;">
-    <x-button id="x1" data-effect-type="0" data-elevation="0" data-background-color="#409EFF" 
-      data-size="[100, 50]">X-1</x-button>
-    <x-button id="x2" data-effect-type="1" data-elevation="0" data-background-color="#1C88F7">X-Btn</x-button>
-    <x-button id="x3" data-effect-type="2" data-elevation="1" data-background-color="#409EFF" >X-Button3</x-button>
+  <div class="hex">
+
     
   </div>
+  <div class="hex">
 
+    
+  </div>
   <script>
     
   </script>
