@@ -22,103 +22,188 @@
             perspective-origin: 50% 50%;
         }
 
-        .cube {
+        /* 外部盒子 */
+        .wrap-cube {
             width: 200px;
             height: 200px;
             transform-style: preserve-3d;
             transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-            animation-direction:initial;
-            animation: spin 8s infinite linear;
+            animation-direction: initial;
+            animation: wrap-spin 8s infinite linear;
             user-select: none;
+            cursor: pointer;
         }
 
-        .cube div {
+        .wrap-cube>[class|=wrap] {
             position: absolute;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 200px;
             height: 200px;
-            font: 400 larger "Times New Roman"; 
+            font: 400 larger "Times New Roman";
             text-transform: uppercase;
-            color: whitesmoke;
-            background-color: rgba(98, 98, 98, 0.8);
-            box-shadow: inset 0 0 2px 2px rgba(198, 198, 198, 1);            
+            color: black;
+            background-color: rgba(98, 98, 98, 0.5);
+            box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, 1);            
         }
 
-        .front {
+        .wrap-front {
             transform: translateZ(100px);
         }
 
-        .back {
+        .wrap-back {
             transform: rotateY(180deg) translateZ(100px);
         }
 
-        .left {
+        .wrap-left {
             transform: rotateY(-90deg) translateZ(100px);
         }
 
-        .right {
+        .wrap-right {
             transform: rotateY(90deg) translateZ(100px);
         }
 
-        .top {
+        .wrap-top {
             transform: rotateX(90deg) translateZ(100px);
         }
 
-        .bottom {
+        .wrap-bottom {
             transform: rotateX(-90deg) translateZ(100px);
         }
 
-        @keyframes spin {
-            0%{
+        /* @keyframes wrap-spin {
+            from {
                 transform: rotate3d(0, 0, 0, 0deg);
             }
-            100%{
-                transform: rotate3d(1, 1, 1, 360deg);
-            }            
-        }
 
-        /* @keyframes spin {
-            0%{
-                transform: rotateX(0deg);
+            to {
+                transform: rotate3d(1, 1, 1, 360deg);
             }
-            100%{
-                transform: rotateX(360deg);
-            }            
         } */
 
-        /* @keyframes spin {
+        @keyframes wrap-spin {
             from {
-                transform: rotateY(0);
+                transform: rotateY(0deg);
             }
 
             to {
                 transform: rotateY(360deg);
             }
-        } */
+        }
+
+        /* 内部盒子 */
+        .core-cube {
+            width: 100px;
+            height: 100px;
+            transform-style: preserve-3d;
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            animation-direction: initial;
+            animation: core-spin 8s infinite linear;
+            user-select: none;
+            cursor: pointer;
+        }
+       
+        .core-cube>[class|=core] {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 20, 147, .8);
+            box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .3);
+            left: 50px;
+            top: 50px;
+            background-image: url('./RMlogo.svg');
+            background-size: 100% 100%;
+        }
+
+        .core-front {
+            transform: translateZ(50px);
+        }
+
+        .core-back {
+            transform: rotateY(180deg) translateZ(50px);
+        }
+
+        .core-left {
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+
+        .core-right {
+            transform: rotateY(90deg) translateZ(50px);
+        }
+
+        .core-top {
+            transform: rotateX(90deg) translateZ(50px);
+        }
+
+        .core-bottom {
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+
+        /* 鼠标移动到wrap上的时候，外层的面自动向外展开 */
+        .wrap-cube:hover .wrap-front {
+            transform: translateZ(200px);
+        }
+
+        .wrap-cube:hover .wrap-back {
+            transform: translateZ(-200px) rotateY(180deg);
+        }
+
+        .wrap-cube:hover .wrap-left {
+            transform: translateX(-200px) rotateY(-90deg);
+        }
+
+        .wrap-cube:hover .wrap-right {
+            transform: translateX(200px) rotateY(90deg);
+        }
+
+        .wrap-cube:hover .wrap-top {
+            transform: translateY(-200px) rotateX(90deg);
+        }
+
+        .wrap-cube:hover .wrap-bottom {
+            transform: translateY(200px) rotateX(-90deg);
+        }
+
+        @keyframes core-spin {
+            from {
+                transform: rotateY(0deg);
+            }
+
+            to {
+                transform: rotateY(0deg);
+            }
+        }
+
     </style>
 </head>
 
 <body>
     <div class="wrap">
-        <div class="cube">
-            <div class="front">front</div>
-            <div class="back">back</div>
-            <div class="top">top</div>
-            <div class="bottom">bottom</div>
-            <div class="left">left</div>
-            <div class="right">right</div>
+        <div class="wrap-cube">
+            <div class="wrap-front">front</div>
+            <div class="wrap-back">back</div>
+            <div class="wrap-top">top</div>
+            <div class="wrap-bottom">bottom</div>
+            <div class="wrap-left">left</div>
+            <div class="wrap-right">right</div>
 
-            
-
-            <div class="core-front">front</div>
-            <div class="core-back">back</div>
-            <div class="core-top">top</div>
-            <div class="core-bottom">bottom</div>
-            <div class="core-left">left</div>
-            <div class="core-right">right</div>
+            <div class="core-cube">
+                <div class="core-front"></div>
+                <div class="core-back"></div>
+                <div class="core-left"></div>
+                <div class="core-right"></div>
+                <div class="core-top"></div>
+                <div class="core-bottom"></div>
+            </div>
         </div>
+
+        
+        
+
     </div>
 </body>
 
